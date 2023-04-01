@@ -1,16 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import { useRouter } from 'next/router'
-import { createApi } from 'unsplash-js';
-// import Photos from '../../Components/UI_Interface/Photo_Section/Photos';
+import baseUrl from '../../mongodb/baseUrl'
 import CtnPhotos from '../../Components/UI_Interface/CollectionPhotos/CtnPhotos';
 import CtnView from '../../Components/UI_Interface/CollectionPhotos/CtnView';
-// import EachCtPhoto from '../../Components/UI_Interface/Files/EachCtPhoto';
-// import CtPhotos from '../../Components/UI_Interface/Category/CtPhotos';
-const unsplash=createApi(
-    {
-      accessKey:"uOkxQ8pVVP3qNs7M4_EjJYN9LYm0y1JI6E1D4LbP1DE"
-    }
-  );
+import Head from 'next/head';
+
 //   Images,query
 export default function CollectionsDynamic({ctn}) {
     const router=useRouter()
@@ -19,40 +13,48 @@ export default function CollectionsDynamic({ctn}) {
     const [imageArr, setImageArr] = useState([])
 
     let id=router.query.ctn
-    const [page, setPage] = useState(1)
+    // const [page, setPage] = useState(1)
 
     
     useEffect(() => {
       
 // console.log("Hello from [ctg].jsx")
-async function fetchCtnData(){
-  let request=await unsplash.collections.getPhotos({
-    collectionId:id,
-    page:page,
-    perPage:18
-})
+
+//   let request=await unsplash.collections.getPhotos({
+//     collectionId:id,
+//     page:page,
+//     perPage:18
+// })
+
 
       // console.log(request.response.results)
       // console.log("the imageArr",imageArr)
-      setImageArr(request.response.results)
+      setImageArr(ctn.Images)
       
-    }
-    fetchCtnData()
+    
 
 
 
-    }, [id])
+    
+    }, [])
     
     // console.log("hello",imageArr[8])
 
   return (
     <>
 
-    
-{/* <Photos term={id} imageArr={imageArr} setImageArr={setImageArr} unsplash={unsplash} page={page} setPage={setPage}/>
- */}
+<Head>
+        <title>{ctn.title} - {ctn.curatedBy} | Unreveal</title>
+        <meta name="description" content="Unreveal is the site for all visuals to easily download free high resolution  photos and use them for various purposes like creating your own app or website. It has easy customization, optimized and ultra resolution photos for free. It cost you no money. That's is the power of Unreveal." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
  <CtnView ctn={ctn}/>
- <CtnPhotos term={id} imageArr={imageArr} setImageArr={setImageArr} unsplash={unsplash} page={page} setPage={setPage}/>
+ <CtnPhotos
+  // term={id}
+   imageArr={imageArr} 
+  //  setImageArr={setImageArr} unsplash={unsplash} page={page} setPage={setPage}
+   />
 
 
 
@@ -61,13 +63,20 @@ async function fetchCtnData(){
 }
 export async function getServerSideProps(ctx){
     let id=ctx.query.ctn
-    let req=await unsplash.collections.get({
-        collectionId:id
+    const req=await fetch(`${baseUrl}/api/account/cltnPhotos`,{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify({
+        ctnId:id
+      })
     })
-    console.log("The ctn id",req)
+    const res=await req.json()
+    
     return{
         props:{
-          ctn:req.response
+          ctn:res.response.results
         }
     }
 }
