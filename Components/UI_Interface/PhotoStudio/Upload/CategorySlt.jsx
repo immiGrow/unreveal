@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import image from '../../../Images/Animals.jpg'
+
 
 export default function CategorySlt({setSelected,selected}) {
     let category=[

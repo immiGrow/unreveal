@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import imgs from '../../../Images/Animals.jpg'
+
 import {AiFillEye, AiFillHeart,AiOutlineDownload} from 'react-icons/ai'
 export default function TabularForm({userImgs}) {
   return (

@@ -1,6 +1,6 @@
-import Image from 'next/image'
+
 import React,{useState} from 'react'
-import photo from '../../Images/fashion.jpg'
+
 import {BsFacebook,BsYoutube,BsInstagram,BsTwitter} from 'react-icons/bs'
 import {RxCross2} from 'react-icons/rx'
 import Link from 'next/link'

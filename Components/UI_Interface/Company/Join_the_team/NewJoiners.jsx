@@ -119,9 +119,9 @@ export default function NewJoiners({allusers}) {
 <div className="images   md:py-12 grid grid-cols-2 space-x-2 md:px-4 md:space-x-4 md:space-y-4">
 
 
-<Image width={300} height={200} src={parrot.src} className="w-full rounded-sm shadow-xl  bg-slate-700 bg-opacity-10 opacity-100 md:h-32  lg:h-56 h-24 object-cover" alt="image" />
-<Image width={300} height={200} src={rch3.src} className="w-full  rounded-sm shadow-xl bg-slate-700 bg-opacity-10  md:h-32  lg:h-56 h-24 object-cover" alt="image" />
-<Image width={300} height={200} src={rch1.src} className="w-full  rounded-sm shadow-xl bg-slate-700 bg-opacity-10  md:h-32  hidden md:block lg:h-56 h-24 object-cover" alt="image" />
+<Image width={300} height={200} src={"https://res.cloudinary.com/unreveal/image/upload/v1678877613/parrot_pdrlrm.jpg"} className="w-full rounded-sm shadow-xl  bg-slate-700 bg-opacity-10 opacity-100 md:h-32  lg:h-56 h-24 object-cover" alt="image" />
+<Image width={300} height={200} src={"https://res.cloudinary.com/unreveal/image/upload/v1678877621/rch3_rbrhha.jpg"} className="w-full  rounded-sm shadow-xl bg-slate-700 bg-opacity-10  md:h-32  lg:h-56 h-24 object-cover" alt="image" />
+<Image width={300} height={200} src={"https://res.cloudinary.com/unreveal/image/upload/v1678877634/rch1_mmy3af.jpg"} className="w-full  rounded-sm shadow-xl bg-slate-700 bg-opacity-10  md:h-32  hidden md:block lg:h-56 h-24 object-cover" alt="image" />
 
 
 </div>
