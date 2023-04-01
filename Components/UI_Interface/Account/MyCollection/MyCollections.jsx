@@ -1,8 +1,5 @@
 import React from 'react'
-import cont1 from '../../../Images/cont1.jpg'
-import cont2 from '../../../Images/cont2.jpg'
-import cont3 from '../../../Images/cont3.jpg'
-import cont4 from '../../../Images/cont4.jpg'
+
 import { useRouter } from 'next/router'
 import { ReactPhotoCollage } from "react-photo-collage";
 import Link from 'next/link'
