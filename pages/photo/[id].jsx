@@ -60,7 +60,7 @@ useEffect(() => {
 
   }
   relCltnsAndPhotos()
-}, [])
+})
 
 useEffect(() => {
   // console.log("
@@ -75,7 +75,7 @@ useEffect(() => {
   }
 
 
-}, [])
+}, [photo,userId]);
 useEffect(() => {
     
   const changer=

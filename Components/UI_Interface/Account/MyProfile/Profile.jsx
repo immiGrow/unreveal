@@ -33,7 +33,7 @@ export default function Profile({profile}) {
   useEffect(() => {
    console.log("hello using from profile component")
    getFollowers()
-  }, [])
+  })
   
   const handleFo=()=>{
     setToggle('followers')

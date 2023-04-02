@@ -24,7 +24,7 @@ export default function AllNotifications({showNots,setShowNots,notifications,set
       if(showNots){
         updateNotification()
       }
-    }, [showNots])
+    })
     
   const showDate=(notified)=>{
     const published = new Date(notified).toLocaleDateString("en-us", {
@@ -44,10 +44,10 @@ export default function AllNotifications({showNots,setShowNots,notifications,set
                   <MdNotificationsActive />
                 </span>
                {
-                notifications.map((notfn)=>{
+                notifications.map((notfn,i)=>{
                     if(notfn.status==="unread"){
                         return(
-                            <div className="bg-red-700 text-xs h-2 w-2 text-white rounded-full absolute -top-1 -right-1">
+                            <div key={i} className="bg-red-700 text-xs h-2 w-2 text-white rounded-full absolute -top-1 -right-1">
                  
                  </div>
                         )
