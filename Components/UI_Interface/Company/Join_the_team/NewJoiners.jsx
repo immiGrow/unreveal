@@ -1,11 +1,4 @@
 import React from 'react'
-import rch1 from '../../../Images/rch1.jpg'
-import rch2 from '../../../Images/rch2.jpg'
-import rch3 from '../../../Images/rch3.jpg'
-import team1 from '../../../Images/team1.jpg'
-import parrot from '../../../Images/parrot.jpg'
-
-import fulllogo from '../../../Images/fulllogo.png'
 import Image from 'next/image'
 
 export default function NewJoiners({allusers}) {
@@ -59,7 +52,7 @@ export default function NewJoiners({allusers}) {
         </span> </h1>
     {/*Unreveal's logo */}
     <div className="py-2 ">
-       <Image width={300} height={200} src={fulllogo.src} className="w-32" alt="Unreveal" />
+       <Image width={300} height={200} src={"https://res.cloudinary.com/unreveal/image/upload/v1678877600/fulllogo_furhgt.png"} className="w-32" alt="Unreveal" />
 
     </div>
     
