@@ -57,21 +57,22 @@ const unfollowTheUser=async()=>{
  
 }
 
-const redirectUser=()=>{
-  console.log("The router",router.asPath)
-  if(router.asPath===`/userphotos/${userId}`){
-   
-    router.push({
-      pathname:"/account/myImages"
-    })
-  }
-  else{
-    console.log("User is not user")
-  }
 
-}
 
 useEffect(() => {
+  const redirectUser=()=>{
+    console.log("The router",router.asPath)
+    if(router.asPath===`/userphotos/${userId}`){
+     
+      router.push({
+        pathname:"/account/myImages"
+      })
+    }
+    else{
+      console.log("User is not user")
+    }
+  
+  }
   if(profile.followers.includes(userId)){
     setFollowed(true)
   }
@@ -79,7 +80,7 @@ useEffect(() => {
     setFollowed(false); 
   }
 redirectUser()
-},[profile.followers, userId, redirectUser])
+},[profile.followers, userId,router])
 
 
 
