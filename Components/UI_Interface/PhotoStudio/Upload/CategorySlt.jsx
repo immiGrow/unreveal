@@ -110,7 +110,7 @@ export default function CategorySlt({setSelected,selected}) {
         category.map((ctg,index)=>{
             return(
 
-      <li key={index} onClick={()=>sltCtgry(ctg.text)} className="text-gray-900 hover:bg-slate-100 relative cursor-default py-2 pl-3 pr-9" id="listbox-option-0" role="option">
+      <li key={index} onClick={()=>sltCtgry(ctg.text)} className="text-gray-900 hover:bg-slate-100 relative cursor-default py-2 pl-3 pr-9" id="listbox-option-0">
         <div className="flex items-center">
           {/* <img src={image.src} alt="" className="h-5 w-5 flex-shrink-0 rounded-full"/> */}
       
