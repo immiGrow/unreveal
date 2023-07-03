@@ -49,7 +49,7 @@ export default function Home({ photo,searches,cltns }) {
     setDeviceHeight(height)
     setDeviceWidth(width)
     console.log("The widdth is ",width,"the height",height)
-  },[]);
+  },[page,totalDocs]);
   
 useEffect(() => {
   if(term.length){
