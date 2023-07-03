@@ -13,6 +13,7 @@ export default function reach() {
       </Head>
      <Reach/>   
      <Footer/>
+   
     </>
   )
 }

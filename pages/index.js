@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import baseUrl from "../mongodb/baseUrl";
+
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsFillEyeFill, BsFillBagPlusFill,BsHeartFill } from "react-icons/bs";
-import fs from 'fs';
+
 import * as Realm from 'realm-web'
 import Photos from "../Components/UI_Interface/Photo_Section/Photos";
 import Footer from "../Components/UI_Interface/Files/Footer";
@@ -15,7 +15,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Category from "../Components/UI_Interface/Navigation_Bar/Category";
 import Link from "next/link";
-
+const baseUrl = process.env.NODE_ENV === "production" ? "https://unrevealakc.vercel.app" : "http://localhost:3000"
 export default function Home({ photo,searches,cltns }) {
   const router = useRouter();
   const [term, setTerm] = useState("");
@@ -49,7 +49,7 @@ export default function Home({ photo,searches,cltns }) {
     setDeviceHeight(height)
     setDeviceWidth(width)
     console.log("The widdth is ",width,"the height",height)
-  },[page,totalDocs]);
+  },[]);
   
 useEffect(() => {
   if(term.length){
@@ -175,10 +175,8 @@ const trendingTopics=[
           content="Unreveal is the site for all visuals to easily download free high resolution  photos and use them for various purposes like creating your own app or website. It has easy customization, optimized and ultra resolution photos for free. It cost you no money. Photography is not only a hobby but it can also be your carrier."
         />
         <link rel="icon" href="/favicon.ico" />
-        <meta 
-          name="google-site-verification"
-          content="oDvA5gxOAX6dQlG_vl5B2-X2R9dFrGWl1GIH0JK_lZg"
-        />
+        
+        <meta name="google-site-verification" content="418Bu2sXq34B_lHfLStaeiCIu9jPe3qgPBbWlVo09RE" />
         <meta name="msvalidate.01" content="57F36F6E09DC46A25EC97A50FD3B3FE7" />
       </Head>
 
@@ -204,7 +202,7 @@ const trendingTopics=[
         <div className=" ">
           <div className=" text-white space-y-4   ">
             <h1 className=" text-3xl md:text-5xl font-bold py-4">Unreveal</h1>
-            <span className="">
+            <div className="">
               <p className="font-semibold   ">
                 Photography is not only a Hobby,
               </p>
@@ -212,7 +210,7 @@ const trendingTopics=[
                 This can also be your Career
               </p>
               
-            </span>
+            </div>
             <div className="absolute -z-10 bottom-32 md:-bottom-14 lg:-bottom-0  md:w-full w-5/6 ">
               <div className="flex justify-between items-center w-full text-sm">
                 <div className="flex items-center space-x-2">
@@ -224,7 +222,7 @@ const trendingTopics=[
                       photo.user.profile_image ||
                        "https://res.cloudinary.com/unreveal/image/upload/v1678877614/profile_agyzhd.png"}
                     className="w-8 h-8 md:w-10 md:h-10 object-top bg-white rounded-full object-cover"
-                    alt=""
+                    alt="uploader"
                   /></Link>
                   <span className="">
                       { photo.user.username}
@@ -415,13 +413,11 @@ export async function getServerSideProps(context) {
   {/*Recent Searches */}
   const request = await fetch(`${baseUrl}/api/photostudio/random`);
   const response = await request.json();
-  console.log("The random photo", response.response.results);
-  const searches=[]
-  const data=fs.readFileSync('recent_searches.json')
-  const objData = JSON.parse(data)
-  for(let key in objData){
-    searches.push(objData[key])
-  }
+  console.log("The random photo", response);
+{/*Getting all recent searches */}
+  const req2 = await fetch(`${baseUrl}/api/addToSrchReqPh/searches`);
+  const res2 = await req2.json();
+  console.log(res2);
   {/*Trending collections */}
   const req = await fetch(`${baseUrl}/api/account/trendingCltn`);
   const res = await req.json();
@@ -430,7 +426,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       photo: response.response.results,
-      searches:searches,
+      searches:res2.searches,
       cltns:res.response.results
     },
   };
