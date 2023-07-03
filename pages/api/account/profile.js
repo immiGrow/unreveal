@@ -1,4 +1,5 @@
 import Authenticated from "../../../middleware/Authenticated";
+import Photo from "../../../models/Photo";
 import Users from "../../../models/Users";
 export default function handlerOfProfile(req, res) {
     if (req.method === "POST") {
@@ -60,11 +61,47 @@ const updateUserProfile = Authenticated(async(req, res) => {
 
 const fetchUserProfile = Authenticated(async(req, res) => {
 
-    const fetchProfile = await Users.findOne({ _id: req.user })
-    await res.status(200).json({
-        success: true,
-        userProfile: fetchProfile
-    })
+    const rankViewLikes=await Photo.find({}).sort({likes:-1,views:-1})
+    const arr=[]
+    for (let i = 0; i < rankViewLikes.length; i++) {
+        const element = rankViewLikes[i];
+        arr.push(element.user.toString())
+        
+    }
+    const rankFind=arr.filter((item,index) => arr.indexOf(item.toString()) === index);
+    console.log(rankFind)
+    
+    let totalLikes=0
+    let totalViews=0
+    const userProfile=await Users.findOne({_id:req.user})
+    const filtered_user=rankViewLikes.filter((data)=>data.user.toString()===req.user)
+    for (let i = 0; i < rankViewLikes.length; i++) {
+        const item = rankViewLikes[i];
+       
+        if (item.user.toString()===userProfile._id.toString()){
+          
+            for (let m = 0; m < filtered_user.length; m++) {
+            const e = filtered_user[m];
+          
+            console.log("The totalLikes &  Views",e)
+            totalLikes+=e.likes.length
+            totalViews+=e.views
+                
+            }
+            console.log(item.user.toString(),userProfile.toString())
+            console.log("matched")
+            await res.status(200).json({
+                success: true,
+                userProfile,
+                rank:rankFind.indexOf(req.user)+1,
+                totalViews,
+                totalLikes
+                
+            })
+        }
+        
+    }
+    
 
 })
 

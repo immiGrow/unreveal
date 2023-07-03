@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import NothingFound from '../../Components/UI_Interface/Files/NothingFound'
 import Head from 'next/head'
-export default function MyImages({images,profile}) {
+export default function MyImages({images,rank,totalLikes,totalViews,profile}) {
     const {token}=parseCookies()
   return (
     <>
@@ -20,7 +20,7 @@ export default function MyImages({images,profile}) {
         <link rel="icon" href="/favicon.ico" />
        
       </Head>
-    <Profile profile={profile}/>
+    <Profile profile={profile} rank={rank} totalLikes={totalLikes} totalViews={totalViews}/>
     <AccountNav/> 
     {/*Show all User's Images */}
    {images.length>0? <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-4 w-full px-2 py-4">
@@ -77,7 +77,10 @@ if(token){
 return {
     props:{
         images:res.response.results,
-        profile:res2.userProfile
+        profile:res2.userProfile,
+        rank:res2.rank,
+        totalViews:res2.totalViews,
+        totalLikes:res2.totalLikes
     }
 }
 }

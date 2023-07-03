@@ -6,7 +6,7 @@ import baseUrl from '../../mongodb/baseUrl'
 import MyCollections from '../../Components/UI_Interface/Account/MyCollection/MyCollections'
 import NothingFound from '../../Components/UI_Interface/Files/NothingFound'
 import Head from 'next/head'
-export default function MyCltns({profile,cltn}) {
+export default function MyCltns({profile,rank,totalLikes,totalViews,cltn}) {
  
   return (
     <>
@@ -19,7 +19,7 @@ export default function MyCltns({profile,cltn}) {
         <link rel="icon" href="/favicon.ico" />
        
       </Head>
-    <Profile profile={profile}/>
+    <Profile profile={profile} rank={rank} totalLikes={totalLikes} totalViews={totalViews}/>
     <AccountNav/>
     {
       cltn.length>0?
@@ -64,6 +64,9 @@ export async function getServerSideProps(ctx){
       props:{
           // images:res.response.results,
           profile:res2.userProfile,
+          rank:res2.rank,
+          totalViews:res2.totalViews,
+          totalLikes:res2.totalLikes,
           cltn:res.response.results
       }
   }

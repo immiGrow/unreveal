@@ -11,20 +11,20 @@ import TabularForm from '../../Components/UI_Interface/Account/Statistics/Tabula
 
 
 
-export default function Statistics({profile,userId,userImgs,userCltns}) {
+export default function Statistics({profile,userId,userImgs,rank,totalLikes,totalViews,userCltns}) {
   let chartIdsArr=[
     {
       type:"views",
-      chartId:"64086fef-058e-47fe-843d-ecc495522d05"
+      chartId:"648af1fa-45fb-46fd-8218-d5ca52a2af7e"
     },
     {
       type:"likes",
-      chartId:"d0189e4f-6bf0-4901-8019-83bd8866b1ae"
-    },
-    {
-      type:"downloads",
-      chartId:"1691b52d-685d-4ace-bb89-0b78acfa8423"
-    },
+      chartId:"648af0ee-ac1e-4ef3-861e-68be9ca8cc7f"
+    }
+    // {
+    //   type:"downloads",
+    //   chartId:"1691b52d-685d-4ace-bb89-0b78acfa8423"
+    // },
     
     
   ]
@@ -42,13 +42,11 @@ export default function Statistics({profile,userId,userImgs,userCltns}) {
       </Head>
 
       
-    <Profile profile={profile}/>
+    <Profile profile={profile} rank={rank} totalLikes={totalLikes} totalViews={totalViews}/>
     <AccountNav/>
     <div className="px-3 text-sm text-slate-700 py-3 block sm:hidden">
-<h2 className="text-black font-semibold">*Get Your Visualization Photos Progress over a large devices such as Tablet, Laptop or Desktop.</h2>
-<p>Login your account on a large device</p>
       </div> 
-    <div className="">
+    <div className="flex justify-center xl:space-x-24">
     {
       chartIdsArr.map((chart,index)=>{
         return(
@@ -131,6 +129,9 @@ export async function getServerSideProps(ctx){
         props:{
             // images:res.response.results,
             profile:res2.userProfile,
+            rank:res2.rank,
+            totalViews:res2.totalViews,
+            totalLikes:res2.totalLikes,
             userId:res.userId,
             userImgs:resImgs.response.results,
             userCltns:resCltns.response.results

@@ -45,14 +45,14 @@ console.log("The views",res)
 
   return (
     <>
-    <div onClick={incViews} className="Photo relative group w-full">
+    <div onClick={incViews} className="Photo relative group w-fit">
  <Link href={`/photo/${image._id}`}>
   
  <div className="eachview  relative w-full ">
 <div className="image relative w-full  h-full ">
     {/* <img src={view.photo.src} className="w-full h-full  object-cover rounded-md"  alt="" /> */}
     <Image 
- className="rendering-img relative group-hover:opacity-90 " 
+ className=" relative group-hover:opacity-90 " 
 // className='relative group-hover:opacity-90 opacity-100 w-full rendering-img object-cover'
 width={500} height={600}
 // placeholder="blur"
